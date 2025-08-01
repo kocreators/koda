@@ -1,2 +1,0 @@
-# koda
-AI design tool
