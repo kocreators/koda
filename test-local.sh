@@ -1,20 +1,35 @@
 #!/bin/bash
+set -e
 
-# Quick local test script
-echo "🧪 Testing Koda locally..."
+echo "🧪 TESTING LOCALLY"
+echo "================="
 
-# Build the project
-echo "Building..."
+# Kill any existing dev servers
+pkill -f "vite\|npm.*dev" 2>/dev/null || true
+sleep 1
+
+# Clean build
+rm -rf dist/ node_modules/.vite/ 2>/dev/null || true
+
+echo "🔨 Building for test..."
 npm run build
 
-if [ $? -eq 0 ]; then
-    echo "✅ Build successful!"
-    echo ""
-    echo "🌐 Starting local server..."
-    echo "Visit: http://localhost:8000/koda/"
-    echo "Press Ctrl+C to stop"
-    echo ""
-    cd dist && python3 -m http.server 8000
-else
-    echo "❌ Build failed - check errors above"
+if [ $? -ne 0 ]; then
+    echo "❌ Build failed - installing dependencies..."
+    npm install
+    npm run build
+    if [ $? -ne 0 ]; then
+        echo "❌ Build still failed"
+        exit 1
+    fi
 fi
+
+echo "✅ Build successful!"
+echo ""
+echo "🌐 Starting development server..."
+echo "📍 Open http://localhost:8080"
+echo ""
+echo "✨ You should see beautiful Kocreators styling!"
+echo "🚨 Press Ctrl+C to stop testing"
+
+npm run dev
