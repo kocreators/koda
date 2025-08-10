@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koda App Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .success { background: #d4edda; }
+        .error { background: #f8d7da; }
+        .pending { background: #fff3cd; }
+        iframe { width: 100%; height: 500px; border: 2px solid #007a62; border-radius: 8px; margin-top: 10px; }
+        button { padding: 10px 20px; background: #007a62; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #005a43; }
+        .status { font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Koda App Live Test</h1>
+    
+    <div class="test-section pending" id="test1">
+        <h3>1. Direct CloudFront Test</h3>
+        <p><strong>URL:</strong> https://d3d8ucpm7p01n7.cloudfront.net/koda/</p>
+        <button onclick="testCloudFront()">Test CloudFront</button>
+        <button onclick="openCloudFront()">Open in New Tab</button>
+        <div class="status" id="cloudfront-status">Click test button</div>
+    </div>
+
+    <div class="test-section pending" id="test2">
+        <h3>2. S3 Website Test</h3>
+        <p><strong>URL:</strong> http://koda-logo-generator-jordanbremond-2025.s3-website-us-east-1.amazonaws.com/koda/</p>
+        <button onclick="openS3()">Open S3 Direct</button>
+        <div class="status" id="s3-status">S3 websites work best when opened directly</div>
+    </div>
+
+    <div class="test-section" id="preview">
+        <h3>3. Live Preview</h3>
+        <p>Loading your Koda app directly:</p>
+        <iframe src="https://d3d8ucpm7p01n7.cloudfront.net/koda/" onload="handleLoad()" onerror="handleError()"></iframe>
+        <div class="status" id="preview-status">Loading...</div>
+    </div>
+
+    <div class="test-section" id="expected">
+        <h3>4. What You Should See</h3>
+        <p><strong>If working correctly, your app should show:</strong></p>
+        <ul>
+            <li>✅ <strong>KODA</strong> title in teal color (#007a62)</li>
+            <li>✅ <strong>AI LOGO GENERATOR</strong> subtitle</li>
+            <li>✅ Business name input field</li>
+            <li>✅ Dropdown menus for business type, industry, style, colors</li>
+            <li>✅ Green "Generate Logo Design Prompt" button</li>
+        </ul>
+        <p><strong>Three-step user flow:</strong></p>
+        <ol>
+            <li><strong>Design Builder:</strong> Form to collect business details</li>
+            <li><strong>Logo Generator:</strong> Display AI prompt and mock logo</li>
+            <li><strong>Pricing Chatbot:</strong> Interactive quote system</li>
+        </ol>
+    </div>
+
+    <script>
+        function testCloudFront() {
+            const status = document.getElementById('cloudfront-status');
+            const section = document.getElementById('test1');
+            
+            status.textContent = 'Testing...';
+            section.className = 'test-section pending';
+            
+            fetch('https://d3d8ucpm7p01n7.cloudfront.net/koda/')
+                .then(response => {
+                    if (response.ok) {
+                        status.textContent = `✅ SUCCESS! Status: ${response.status}`;
+                        section.className = 'test-section success';
+                    } else {
+                        status.textContent = `❌ Error: Status ${response.status}`;
+                        section.className = 'test-section error';
+                    }
+                })
+                .catch(error => {
+                    status.textContent = `❌ Failed: ${error.message}`;
+                    section.className = 'test-section error';
+                });
+        }
+
+        function openCloudFront() {
+            window.open('https://d3d8ucpm7p01n7.cloudfront.net/koda/', '_blank');
+        }
+
+        function openS3() {
+            window.open('http://koda-logo-generator-jordanbremond-2025.s3-website-us-east-1.amazonaws.com/koda/', '_blank');
+        }
+
+        function handleLoad() {
+            document.getElementById('preview-status').textContent = '✅ Iframe loaded successfully!';
+        }
+
+        function handleError() {
+            document.getElementById('preview-status').textContent = '❌ Iframe failed to load';
+        }
+
+        // Auto-test on load
+        setTimeout(testCloudFront, 1000);
+    </script>
+</body>
+</html>
