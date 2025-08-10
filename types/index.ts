@@ -1,43 +1,52 @@
-// Global type definitions for the Koda Logo Generator
-
-export interface LogoGenerationPayload {
-  tool: string;
-  term: string;
-  promptEnhancing: boolean;
-  size: string;
-}
-
-export interface LogoGenerationResponse {
-  job_id: string;
-}
-
-export interface LogoResultResponse {
-  image_url?: string;
-}
-
-export interface PricingData {
-  category: string;
-  tier: string;
-  brandName: string;
-  productName: string;
-  placement: string;
-  decorationStyle: string;
-  pricing: { [quantity: string]: number };
-}
-
-export interface ChatbotSelections {
-  category: string;
-  tier: string;
-  placement: string;
-  decorationStyle: string;
-}
-
 export type CurrentStep = 'prompt' | 'generate';
-export type ChatbotStep = 1 | 2 | 3 | 4 | 5;
 
-// Environment variables
-declare global {
-  interface Window {
-    // Add any global window properties if needed
-  }
+export interface LogoGeneratorProps {
+  initialPrompt: string;
+  onRequestQuote: () => void;
+}
+
+export interface DesignPromptBuilderProps {
+  onPromptGenerated: (prompt: string) => void;
+}
+
+export interface PricingChatbotProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export interface ProductCategory {
+  id: string;
+  name: string;
+  description: string;
+  basePrice: number;
+}
+
+export interface ProductTier {
+  id: string;
+  name: 'Economy' | 'Value' | 'Premium';
+  multiplier: number;
+  description: string;
+}
+
+export interface DecorationOption {
+  id: string;
+  name: string;
+  colors: string[];
+  priceAdjustment: number;
+}
+
+export interface QuoteRequest {
+  productCategory: string;
+  productTier: string;
+  logoPlacement: 'front' | 'front-back';
+  decorationStyle: string;
+  quantity: number;
+  logoImage?: string;
+}
+
+export interface PricingOption {
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+  savings?: number;
 }

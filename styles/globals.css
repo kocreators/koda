@@ -1,4 +1,7 @@
-@custom-variant dark (&:is(.dark *));
+@import "tailwindcss";
+
+/* Custom variant for dark mode */
+@variant dark (&:is(.dark *));
 
 :root {
   --font-size: 14px;
@@ -8,8 +11,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
+  --primary: #007a62;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.95 0.0058 264.53);
   --secondary-foreground: #030213;
   --muted: #ececf0;
@@ -20,25 +23,25 @@
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
   --input: transparent;
-  --input-background: #f3f3f5;
+  --input-background: #f8fafc;
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: oklch(0.708 0 0);
+  --ring: #007a62;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  
+  /* Kocreators Brand Colors */
+  --kocreators-primary: #007a62;
+  --kocreators-primary-dark: #005a43;
+  --kocreators-primary-light: #00a87d;
+  --kocreators-accent: #f0f9ff;
+  --kocreators-gradient-start: #f8fafc;
+  --kocreators-gradient-end: #e2e8f0;
 }
 
 .dark {
@@ -48,8 +51,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: #00a87d;
+  --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -60,25 +63,15 @@
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --ring: #00a87d;
+  
+  /* Dark mode Kocreators colors */
+  --kocreators-gradient-start: oklch(0.2 0 0);
+  --kocreators-gradient-end: oklch(0.15 0 0);
 }
 
-@theme inline {
+/* Tailwind v4 theme configuration using zero-config approach */
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -109,211 +102,269 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Kocreators brand colors in Tailwind theme */
+  --color-kocreators-primary: var(--kocreators-primary);
+  --color-kocreators-primary-dark: var(--kocreators-primary-dark);
+  --color-kocreators-primary-light: var(--kocreators-primary-light);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
+/* Base application styles */
+* {
+  border-color: theme(colors.border);
+  outline-color: theme(colors.ring / 50%);
 }
 
-/**
- * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
- */
-@layer base {
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
-    h1 {
-      font-size: var(--text-2xl);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    h2 {
-      font-size: var(--text-xl);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    h3 {
-      font-size: var(--text-lg);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    h4 {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    p {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-normal);
-      line-height: 1.5;
-    }
-
-    label {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    button {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    input {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-normal);
-      line-height: 1.5;
-    }
-  }
+body {
+  background-color: theme(colors.background);
+  color: theme(colors.foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
   font-size: var(--font-size);
 }
 
-/* Custom styles for Koda Design Prompt Builder */
-@layer base {
-  /* Responsive title styles matching original */
+/* Enhanced focus states */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid theme(colors.ring);
+  outline-offset: 2px;
+}
+
+/* KOCREATORS KODA COMPONENT STYLES - USING CSS VARIABLES */
+.koda-title {
+  font-weight: 900 !important;
+  font-size: 3rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  text-shadow: 0 4px 8px rgba(0, 122, 98, 0.2) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  background: linear-gradient(135deg, var(--kocreators-primary) 0%, var(--kocreators-primary-light) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  position: relative !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+}
+
+.koda-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--kocreators-primary) 0%, var(--kocreators-primary-light) 100%);
+  border-radius: 2px;
+}
+
+.koda-container {
+  min-height: 100vh !important;
+  background: linear-gradient(135deg, var(--kocreators-gradient-start) 0%, var(--kocreators-gradient-end) 100%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.koda-hero {
+  text-align: center !important;
+  margin-bottom: 3rem !important;
+  max-width: 56rem !important;
+}
+
+.koda-subtitle {
+  color: var(--muted-foreground) !important;
+  font-size: 1.125rem !important;
+  max-width: 42rem !important;
+  margin: 1rem auto 0 !important;
+  line-height: 1.6 !important;
+}
+
+.koda-card {
+  width: 100% !important;
+  max-width: 56rem !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: calc(var(--radius) + 4px) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.koda-card-header {
+  padding: 2rem 2rem 1rem !important;
+  text-align: center !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.koda-card-header h2 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: var(--card-foreground) !important;
+  margin: 0 !important;
+}
+
+.koda-card-content {
+  padding: 2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem !important;
+}
+
+.koda-question {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+.koda-question label {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: var(--card-foreground) !important;
+}
+
+.koda-optional {
+  color: var(--muted-foreground) !important;
+  font-weight: 400 !important;
+}
+
+.koda-button-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+}
+
+.koda-style-button {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: calc(var(--radius) - 2px) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--card) !important;
+  color: var(--card-foreground) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.koda-style-button:hover {
+  background: var(--accent) !important;
+  border-color: var(--kocreators-primary) !important;
+}
+
+.koda-style-button.selected {
+  background: var(--kocreators-primary) !important;
+  border-color: var(--kocreators-primary) !important;
+  color: var(--primary-foreground) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 122, 98, 0.2) !important;
+}
+
+.koda-input {
+  height: 3rem !important;
+  font-size: 1rem !important;
+  padding: 0.75rem 1rem !important;
+  background: var(--input-background) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: calc(var(--radius) - 2px) !important;
+  outline: none !important;
+  font-family: inherit !important;
+  transition: all 0.2s ease !important;
+  color: var(--foreground) !important;
+}
+
+.koda-input:focus {
+  border-color: var(--kocreators-primary) !important;
+  box-shadow: 0 0 0 2px rgba(0, 122, 98, 0.1) !important;
+}
+
+.koda-input::placeholder {
+  color: var(--muted-foreground) !important;
+}
+
+.koda-button-container {
+  padding-top: 1.5rem !important;
+  text-align: center !important;
+}
+
+.koda-generate-button {
+  padding: 1rem 3rem !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  background: var(--kocreators-primary) !important;
+  color: var(--primary-foreground) !important;
+  border: none !important;
+  border-radius: calc(var(--radius) + 4px) !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 122, 98, 0.2), 0 4px 6px -2px rgba(0, 122, 98, 0.1) !important;
+  transition: all 0.2s ease !important;
+  font-family: inherit !important;
+}
+
+.koda-generate-button:hover {
+  background: var(--kocreators-primary-dark) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 122, 98, 0.25), 0 10px 10px -5px rgba(0, 122, 98, 0.1) !important;
+}
+
+.koda-footer {
+  text-align: center !important;
+  margin-top: 2rem !important;
+}
+
+.koda-footer p {
+  color: var(--muted-foreground) !important;
+  font-size: 0.875rem !important;
+  margin: 0 !important;
+}
+
+.koda-brand {
+  font-weight: 600 !important;
+  color: var(--kocreators-primary) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .koda-title {
-    font-weight: 900;
-    font-size: 2.2em;
-    color: #007a62;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    font-family: Arial, sans-serif;
+    font-size: 2rem !important;
+    letter-spacing: 0.05em !important;
   }
-
-  @media (max-width: 480px) {
-    .koda-title {
-      font-size: 1.6em;
-      letter-spacing: 1px;
-    }
+  
+  .koda-card {
+    margin: 0 0.5rem !important;
   }
-
-  @media (min-width: 481px) and (max-width: 767px) {
-    .koda-title {
-      font-size: 1.8em;
-    }
+  
+  .koda-card-content {
+    padding: 1.5rem !important;
   }
 }
-/* App.tsx Component Styles */
-@layer components {
-  .koda-app {
-    min-height: 100vh;
-    background-color: #f9fafb;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  }
 
-  .koda-header {
-    background-color: #ffffff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+@media (max-width: 480px) {
+  .koda-title {
+    font-size: 1.75rem !important;
   }
+  
+  .koda-card-content {
+    padding: 1rem !important;
+    gap: 1.5rem !important;
+  }
+}
 
-  .koda-header-container {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
+/* Utility for Kocreators branding */
+@utility kocreators-gradient {
+  background: linear-gradient(135deg, var(--kocreators-primary) 0%, var(--kocreators-primary-light) 100%);
+}
 
-  .koda-header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4rem;
-  }
-
-  .koda-header-brand {
-    display: flex;
-    align-items: center;
-  }
-
-  .koda-title-small {
-    font-size: 1.5rem !important;
-    margin: 0 !important;
-  }
-
-  .koda-header-powered {
-    font-size: 0.875rem;
-    color: #6b7280;
-  }
-
-  .koda-main {
-    position: relative;
-  }
-
-  .koda-generator-container {
-    min-height: 100vh;
-    background-color: #f9fafb;
-  }
-
-  .koda-back-button-container {
-    text-align: center;
-    padding-top: 1.5rem;
-    padding-bottom: 1rem;
-  }
-
-  .koda-back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--kocreators-primary);
-    text-decoration: underline;
-    font-weight: 600;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: color 0.2s ease;
-    font-family: inherit;
-  }
-
-  .koda-back-button:hover {
-    color: var(--kocreators-primary-dark);
-  }
-
-  .koda-back-icon {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .koda-app-footer {
-    margin-top: 4rem;
-    background-color: #111827;
-    color: #ffffff;
-  }
-
-  .koda-app-footer-container {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1rem 2rem;
-  }
-
-  .koda-app-footer-content {
-    text-align: center;
-  }
-
-  .koda-app-footer-text {
-    font-size: 0.875rem;
-    color: #d1d5db;
-    margin: 0;
-  }
+@utility kocreators-text {
+  background: linear-gradient(135deg, var(--kocreators-primary) 0%, var(--kocreators-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

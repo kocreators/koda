@@ -1,0 +1,241 @@
+/* KOCREATORS KODA COMPONENT STYLES - STANDALONE FILE */
+
+/* CSS Variables for Kocreators branding */
+:root {
+  --kocreators-primary: #007a62;
+  --kocreators-primary-dark: #005a43;
+  --kocreators-primary-light: #00a87d;
+  --kocreators-accent: #f0f9ff;
+}
+
+/* Main title with beautiful gradient */
+.koda-title {
+  font-weight: 900 !important;
+  font-size: 3rem !important;
+  color: var(--kocreators-primary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  text-shadow: 0 4px 8px rgba(0, 122, 98, 0.2) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  background: linear-gradient(135deg, var(--kocreators-primary) 0%, var(--kocreators-primary-light) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  position: relative !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+}
+
+.koda-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--kocreators-primary) 0%, var(--kocreators-primary-light) 100%);
+  border-radius: 2px;
+}
+
+/* Main container with beautiful gradient background */
+.koda-container {
+  min-height: 100vh !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Hero section */
+.koda-hero {
+  text-align: center !important;
+  margin-bottom: 3rem !important;
+  max-width: 56rem !important;
+}
+
+/* Subtitle styling */
+.koda-subtitle {
+  color: #717182 !important;
+  font-size: 1.125rem !important;
+  max-width: 42rem !important;
+  margin: 1rem auto 0 !important;
+  line-height: 1.6 !important;
+}
+
+/* Glass-effect card */
+.koda-card {
+  width: 100% !important;
+  max-width: 56rem !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Card header */
+.koda-card-header {
+  padding: 2rem 2rem 1rem !important;
+  text-align: center !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.koda-card-header h2 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: #030213 !important;
+  margin: 0 !important;
+}
+
+/* Card content */
+.koda-card-content {
+  padding: 2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem !important;
+}
+
+/* Question styling */
+.koda-question {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+.koda-question label {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: #030213 !important;
+}
+
+.koda-optional {
+  color: #717182 !important;
+  font-weight: 400 !important;
+}
+
+/* Button group for style selection */
+.koda-button-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+}
+
+/* Style selection buttons */
+.koda-style-button {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background: white !important;
+  color: #030213 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.koda-style-button:hover {
+  background: #f8fafc !important;
+  border-color: var(--kocreators-primary) !important;
+}
+
+.koda-style-button.selected {
+  background: var(--kocreators-primary) !important;
+  border-color: var(--kocreators-primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 122, 98, 0.2) !important;
+}
+
+/* Input fields */
+.koda-input {
+  height: 3rem !important;
+  font-size: 1rem !important;
+  padding: 0.75rem 1rem !important;
+  background: #f8fafc !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 0.5rem !important;
+  outline: none !important;
+  font-family: inherit !important;
+  transition: all 0.2s ease !important;
+}
+
+.koda-input:focus {
+  border-color: var(--kocreators-primary) !important;
+  box-shadow: 0 0 0 2px rgba(0, 122, 98, 0.1) !important;
+}
+
+/* Generate button container */
+.koda-button-container {
+  padding-top: 1.5rem !important;
+  text-align: center !important;
+}
+
+/* Main generate button with beautiful styling */
+.koda-generate-button {
+  padding: 1rem 3rem !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  background: var(--kocreators-primary) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 122, 98, 0.2), 0 4px 6px -2px rgba(0, 122, 98, 0.1) !important;
+  transition: all 0.2s ease !important;
+  font-family: inherit !important;
+}
+
+.koda-generate-button:hover {
+  background: var(--kocreators-primary-dark) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 122, 98, 0.25), 0 10px 10px -5px rgba(0, 122, 98, 0.1) !important;
+}
+
+/* Footer styling */
+.koda-footer {
+  text-align: center !important;
+  margin-top: 2rem !important;
+}
+
+.koda-footer p {
+  color: #717182 !important;
+  font-size: 0.875rem !important;
+  margin: 0 !important;
+}
+
+.koda-brand {
+  font-weight: 600 !important;
+  color: var(--kocreators-primary) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .koda-title {
+    font-size: 2rem !important;
+    letter-spacing: 0.05em !important;
+  }
+  
+  .koda-card {
+    margin: 0 0.5rem !important;
+  }
+  
+  .koda-card-content {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .koda-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .koda-card-content {
+    padding: 1rem !important;
+    gap: 1.5rem !important;
+  }
+}
